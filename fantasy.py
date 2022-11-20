@@ -1,4 +1,13 @@
 # Import dependencies
+import json
+from typing import Union, List, Dict, Callable, Type, Any
+from pathlib import Path, PosixPath
+
+from yfpy import Data
+from yfpy.models import Game, StatCategories, User, Scoreboard, Settings, Standings, League, Player, Team, \
+    TeamPoints, TeamStandings, Roster
+from yfpy.query import YahooFantasySportsQuery
+#from yfpy.utils import complex_json_handler, unpack_data
 from yahoo_oauth import OAuth2
 import yahoo_fantasy_api as yfa
 
@@ -26,4 +35,6 @@ team = lg.to_team(teamkey)
 # Get team roster
 roster = team.roster()
 
-print(roster)
+# https://football.fantasysports.yahoo.com/f1/63110 = yahoo url location for linclon 
+query = YahooFantasySportsQuery(auth_dir = "C:/Users/conno/Desktop/yahoo_analysis", league_id="414.l.63110", browser_callback=False)
+team_stats = query.get_team_stats(1)
